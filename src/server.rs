@@ -1,6 +1,8 @@
 use tonic::{transport::Server, Request, Response, Status};
 use full_service::full_server::{Full, FullServer};
 use full_service::{FullReply, FullRequest};
+use uuid::Uuid;
+
 
 pub mod full_service {
     tonic::include_proto!("serving");
@@ -23,10 +25,11 @@ impl Full for MyFull {
 
         let reply = full_service::FullReply {
             client:  data.client,
-            execution: String::from("h34h23j42g3g423g"),
+            execution: Uuid::new_v4().to_string(),
             mask: data.mask,
             features: data.features
         };
+
 
         Ok(Response::new(reply))
     }
