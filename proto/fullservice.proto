@@ -1,0 +1,20 @@
+syntax = "proto3";
+package serving;
+
+service Full{
+    rpc RequestFull (FullRequest) returns (FullReply);
+}
+
+message FullRequest {
+   string features = 1;
+   bool mask = 2;
+   string client = 3;
+}
+
+message FullReply {
+    string client = 1;
+    string execution = 2;
+    bool mask = 3;
+    string features = 4;
+
+}
